@@ -5,10 +5,12 @@ import pickle
 
 st.title("🏠 Ridge Regresyon ile Ev Fiyat Tahmini")
 
-# Modeli yükle
-with open("ridge_model.pkl", "rb") as file:
-    model = pickle.load(file)
+@st.cache_resource
+def load_model():
+    data = joblib.load("ridge_model_full.pkl")
+    return data["model"], data["column_means"], data["columns"]
 
+model, column_means, column_order = load_model()
 # Girdi alanları
 grlivarea = st.number_input("Yaşanabilir Alan (GrLivArea)", min_value=0)
 garagecars = st.number_input("Garaj Kapasitesi", min_value=0)
