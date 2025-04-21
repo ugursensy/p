@@ -40,5 +40,7 @@ if st.button("Tahmin Et"):
     input_df = input_df[model.feature_names_in_]  # 🔥 EN ÖNEMLİ SATIR!
 
     # Tahmin
-    prediction = model.predict(input_df)
+      # 🔥 Eğer log dönüşümlü eğitildiyse:
+    prediction = np.expm1(model.predict(input_df))  # log dönüşüm varsa bu
+
     st.success(f"🏷️ Tahmini Ev Fiyatı: ${prediction[0]:,.0f}")
